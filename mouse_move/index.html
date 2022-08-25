@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>test</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta charset="utf-8" />
+    <style>
+        body {
+            background-color: black;
+        }
+        h1 {
+            color: #fff;
+        }
+        .cursor_item {
+          position: absolute;
+          width: 100px;
+          height: 100px;
+          background-color: red;
+          top: 0;
+          left: 0;
+          margin: -50px 0 0 -50px;
+          transition: all .3s ease;
+        }
+        button {
+          font-size: 40px;
+          font-weight: bold;
+          background: #fff;
+          padding: 30px 80px;
+          margin: 50px;
+          cursor: pointer;
+          transition: all .5s ease;
+        }
+        button:hover {
+          background: red;
+          color: #fff;
+        }
+    </style>
+    <script>
+      let cursor_item;
+      let x = 0;
+      let y = 0;
+      let mx = 0;
+      let my = 0;
+      let speed = 0.03;
+
+      window.onload = function() {
+        let h1 = document.getElementsByTagName("h1")[0];
+        cursor_item = document.getElementsByClassName("cursor_item")[0];
+        // window.addEventListener("click", mousefunc, false);
+        window.addEventListener("mousemove", mousefunc, false);
+
+        function mousefunc(e) {
+          x = e.clientX;
+          y = e.clientY;
+          h1.innerHTML = "x: " +  x + " y: " + y;
+          cursor_item.style.transform = "translate(" + x + "px, " + y + "px)";
+        }
+        loop();
+      }
+      
+      function loop(){
+        mx += (x - mx) * speed;
+        my += (y - my) * speed;
+        cursor_item.style.transform = "translate(" + mx + "px, " + my + "px)";
+        window.requestAnimationFrame(loop);
+      }
+    </script>
+  </head>
+  <body>
+    <h1>test</h1>
+    <div class="cursor_item"></div>
+    <!-- <button type="button">start</button> -->
+  </body>
+</html>

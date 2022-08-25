@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>test</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta charset="utf-8" />
+    <style>
+      body {
+        background-color: black;
+        overflow: hidden;
+      }
+      h1 {
+        color: #fff;
+      }
+      .human {
+        position: absolute;
+        left: calc(50% - 150px);
+        width: 300px;
+        z-index: 100;
+      }
+    </style>
+    <script>
+      let human;
+      let bg;
+      let h1;
+
+      let x = 0;
+      let y = 0;
+      let mx = 0;
+      let my = 0;
+      let speed = 0.03;
+
+      window.onload = function () {
+        h1 = document.getElementsByTagName("h1")[0];
+        human = document.getElementsByClassName("human")[0];
+        bg = document.getElementsByClassName("bg")[0];
+
+        window.addEventListener("mousemove", mousefunc, false);
+
+        function mousefunc(e) {
+          x = e.clientX - window.innerWidth / 2;
+          y = e.clientY - window.innerHeight / 2;
+        }
+        loop();
+      };
+
+      function loop() {
+        mx += (x - mx) * speed;
+        my += (y - my) * speed;
+
+        h1.innerHTML = "x: " + x + " y: " + y;
+        human.style.transform =
+          "translate(" + -(mx / 6) + "px, " + -my / 6 + "px)";
+        bg.style.transform = "translate(" + mx / 2 + "px, " + my / 2 + "px)";
+        window.requestAnimationFrame(loop);
+      }
+    </script>
+  </head>
+  <body>
+    <h1>test</h1>
+    <img src="./layer-7.png" class="human" alt="닝겐" />
+    <img src="./layer-1.jpg" class="bg" alt="벽" />
+  </body>
+</html>
